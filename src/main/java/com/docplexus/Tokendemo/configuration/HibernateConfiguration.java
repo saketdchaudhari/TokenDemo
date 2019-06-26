@@ -1,5 +1,7 @@
 package com.docplexus.Tokendemo.configuration;
 
+import java.util.Properties;
+
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
@@ -58,13 +60,14 @@ public class HibernateConfiguration {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         //JpaVendorAdapteradapter can be autowired as well if it's configured in application properties.
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-        vendorAdapter.setGenerateDdl(false);
+        vendorAdapter.setGenerateDdl(true);
 
         LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
         factory.setJpaVendorAdapter(vendorAdapter);
         //Add package to scan for entities.
         factory.setPackagesToScan(ENTITYMANAGER_PACKAGES_TO_SCAN);
         factory.setDataSource(dataSource());
+        factory.setJpaProperties(additionalProperties());
         return factory;
     }
 
@@ -85,7 +88,13 @@ public class HibernateConfiguration {
         return dataSource;
     }
     
-    
+    private Properties additionalProperties() {
+        Properties properties = new Properties();
+        properties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
+        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5InnoDBDialect");
+            
+        return properties;
+    }
 //	@Bean
 //    public HibernateTransactionManager transactionManager() {
 //       HibernateTransactionManager txManager = new HibernateTransactionManager();

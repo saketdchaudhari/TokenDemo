@@ -16,6 +16,11 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Table(name = "TokenInfo")
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class Token implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;

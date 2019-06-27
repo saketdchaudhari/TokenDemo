@@ -88,4 +88,10 @@ public class Token implements Serializable {
 		this.status = status;
 	}
 
+	@Override
+	public String toString() {
+		return "Token [id=" + id + ", tokenNumber=" + tokenNumber + ", customerid=" + customerid + ", creationDate="
+				+ creationDate + ", counterNumber=" + counterNumber + ", status=" + status + "]";
+	}
+
 }

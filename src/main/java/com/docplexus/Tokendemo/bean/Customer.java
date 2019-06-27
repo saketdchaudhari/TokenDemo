@@ -55,4 +55,9 @@ public class Customer implements Serializable {
 		this.priorityId = priorityId;
 	}
 
+	@Override
+	public String toString() {
+		return "Customer [id=" + id + ", name=" + name + ", priorityId=" + priorityId + "]";
+	}
+	
 }

@@ -53,15 +53,15 @@ public class TokenController {
 		if (token == null) {
 			return new ResponseEntity<Token>(HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<Token>(token, HttpStatus.OK);
+		return new ResponseEntity<Token>(token, HttpStatus.CREATED);
 	}
 
-	@PostMapping(value = "/next/{counterId}", headers = "Accept=application/json")
-	public ResponseEntity<Token> nextByPriority(@RequestBody int counterId) {
+	@GetMapping(value = "/next/{counterId}", produces = "application/json")
+	public ResponseEntity<Token> nextByPriority(@PathVariable("counterId") int counterId) {
 		System.out.println("Assigning Token for counter- " + counterId);
 		Token token = tokenService.nextByPriority(counterId);
 		// display token with counter no by socket programming.
 
-		return new ResponseEntity<Token>(token, HttpStatus.CREATED);
+		return new ResponseEntity<Token>(token, HttpStatus.OK);
 	}
 }

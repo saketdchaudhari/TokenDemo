@@ -27,6 +27,7 @@ public class TokenServiceImp implements TokenService {
 		calendar.setTime(date);
 
 		Token token = new Token();
+		token.setStatus("A");
 		token.setCreationDate(date);
 		token.setCustomerid(userId);
 
@@ -59,9 +60,18 @@ public class TokenServiceImp implements TokenService {
 	// }
 	//
 	 public Token nextByPriority(int counter) {
-		 List<Token> tokens = tokenRepository.findAll();
-		 
-		 return null;
+		 Token nextToken = null;
+		 List<Token> tokens = tokenRepository.findByStatusAndPriority();
+		 System.out.println("tokens :: " + tokens);
+		 for (Token token : tokens) {
+			 System.out.println("token :: " + token);
+			 token.setCounterNumber(counter);
+			 token.setStatus("P");
+			 nextToken = token;
+			 break;
+		 }
+		 System.out.println("nextToken :: " + nextToken);
+		 return nextToken;
 	 }
 
 }

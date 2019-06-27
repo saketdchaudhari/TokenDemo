@@ -18,9 +18,9 @@ public interface TokenRepository extends JpaRepository<Token, Long> {
 	
 	@Query("SELECT token FROM Token token WHERE token.creationDate=(:date)")
 	List<Token> findAllByCreationDate(@Param("date") Date date);
-	
-	@Query("SELECT token FROM Token token WHERE token.status = 'A' order by token.creationTime")
-	Token findByStatusAndPriority();
-	
+
+	@Query("SELECT token FROM Token token WHERE token.status = 'A' order by token.creationDate")
+	List<Token> findByStatusAndPriority();
+
 	Token saveAndFlush(Token token);
 }
